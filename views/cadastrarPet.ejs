@@ -91,7 +91,12 @@
                         <label class="radio-inline"><input type="radio" name="sexo" id="rd_Fe" value="Fêmea"> Fêmea </label>
                     </div>
                 </div>
-
+				<div class="form-group">
+                    <label class="control-label col-sm-2">Coloração do Pet:</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" id="corpet" name="corpet">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2">Porte:</label>
                     <div class="col-sm-8">
@@ -101,7 +106,6 @@
                         <label class="radio-inline"><input type="radio" name="porte" id="rd_Ns" value="Não Sei" checked> Não Sei </label>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="control-label col-sm-2">Idade:</label>
                     <div class="col-sm-8">
@@ -111,7 +115,12 @@
                         <label class="radio-inline"><input type="radio" name="idadePet" id="rd_NS" value="Não Sei" checked/>Não Sei</label>
                     </div>
                 </div>
-
+				<div class="form-group">
+                    <label class="control-label col-sm-2">O Pet possui raça definida? Se sim, qual?</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" id="raca" name="raca">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2">Pet precisa de cuidados veterinários?</label>
                     <div class="col-sm-8">
@@ -120,21 +129,73 @@
                         <label class="radio-inline"><input type="radio" name="cuiVet" id="rd_NS" value="Não Sei" checked/>Não Sei</label>
                     </div>
                 </div>
-
+				<div class="form-group">
+                    <label class="control-label col-sm-2">Pet foi encontrado com machucados ou sinais de maus tratos?</label>
+                    <div class="col-sm-8">
+                        <label class="radio-inline"><input type="radio" name="maustrat" id="rd_mtSim" value="Sim" />Sim</label>
+                        <label class="radio-inline"><input type="radio" name="maustrat" id="rd_mtNao" value="Não" />Não</label>
+                        <label class="radio-inline"><input type="radio" name="maustrat" id="rd_mtNS" value="Não Sei" checked/>Não Sei</label>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label class="control-label col-sm-2">Somente para Fêmeas: Pet está no cio? </label>
+                    <div class="col-sm-8">
+                        <label class="radio-inline"><input type="radio" name="cio" id="rd_cSim" value="Sim" />Sim</label>
+                        <label class="radio-inline"><input type="radio" name="cio" id="rd_cNao" value="Não" />Não</label>
+                        <label class="radio-inline"><input type="radio" name="cio" id="rd_cNS" value="Não Sei" checked/>Não Sei</label>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label class="control-label col-sm-2">Somente para Fêmeas: Pet está prenha?</label>
+                    <div class="col-sm-8">
+                        <label class="radio-inline"><input type="radio" name="prenha" id="rd_pSim" value="Sim" />Sim</label>
+                        <label class="radio-inline"><input type="radio" name="prenha" id="rd_pNao" value="Não" />Não</label>
+                        <label class="radio-inline"><input type="radio" name="prenha" id="rd_pNS" value="Não Sei" checked/>Não Sei</label>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label class="control-label col-sm-2">Tipo de ajuda: </label>
+                    <div class="col-sm-8">
+                        <label class="radio-inline"><input type="radio" name="tipoajuda" id="rd_adocao" value="adocao" />Adoção</label>
+                        <label class="radio-inline"><input type="radio" name="tipoajuda" id="rd_apadrinhamento" value="apadrinhamento" />Apadrinhamento</label>
+                        <label class="radio-inline"><input type="radio" name="tipoajuda" id="rd_ind" value="indife" checked/>Indiferente</label>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label class="control-label col-sm-2">Mais informações sobre o Pet: </label>
+					<div class="col-sm-8">
+						<textarea name="info-pet" id="info-pet" rows="5" cols="40">Mais informações sobre o Pet</textarea>
+					</div>
+                </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2">Data que o Pet foi encontrado:</label>
                     <div class="col-xs-4">
                         <input type="date" class="form-control" id="data" name="data">
                     </div>
                 </div>
-
+				<div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Região:</label>
+                    <div class="col-xs-4">
+						<select name="regiaopet" id="regiaopet">
+							<option value="ZS">Zona Sul</option>
+							<option value="ZL">Zona Leste</option>
+							<option value="ZN">Zona Norte</option>
+							<option value="C">Centro</option>
+						</select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2">Endereço:</label>
                     <div class="col-xs-4">
                         <input type="text" class="form-control" id="endpet" name="endpet">
                     </div>
                 </div>
-
+				<div class="form-group">
+                    <label class="control-label col-sm-2">Descrição do local onde o Pet foi encontrado: </label>
+					<div class="col-sm-8">
+						<textarea name="info-pet" id="info-pet" rows="5" cols="40">Mais informações sobre o local</textarea>
+					</div>
+                </div>
                 <button type="submit" class="btn btn-default" style="margin-left:43%;">Enviar</button>
                 
             </form>
