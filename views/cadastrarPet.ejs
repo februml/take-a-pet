@@ -78,7 +78,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2">Espécie:</label>
                     <div class="col-sm-8">
-                        <label class="radio-inline"><input type="radio" name="espec" id="chk_E_C" value="Cachorro" checked> Cachorro </label>
+                        <label class="radio-inline"><input type="radio" name="espec" id="chk_E_C" value="Cachorro" checked/> Cachorro </label>
                         <label class="radio-inline"><input type="radio" name="espec" id="chk_E_G" value="Gato"> Gato </label>
                         <label class="radio-inline"><input type="radio" name="espec" id="chk_E_O" value="Outro"> Outro </label>
                     </div>
@@ -87,14 +87,14 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2">Sexo:</label>
                     <div class="col-sm-8">
-                        <label class="radio-inline"><input type="radio" name="sexo" id="rd_Ma" value="Macho" checked> Macho </label>
+                        <label class="radio-inline"><input type="radio" name="sexo" id="rd_Ma" value="Macho" checked/> Macho </label>
                         <label class="radio-inline"><input type="radio" name="sexo" id="rd_Fe" value="Fêmea"> Fêmea </label>
                     </div>
                 </div>
 				<div class="form-group">
                     <label class="control-label col-sm-2">Coloração do Pet:</label>
                     <div class="col-xs-4">
-                        <input type="text" class="form-control" id="corpet" name="corpet">
+                        <input type="text" class="form-control" id="txt_cor" name="cor">
                     </div>
                 </div>
                 <div class="form-group">
@@ -103,7 +103,7 @@
                         <label class="radio-inline"><input type="radio" name="porte" id="rd_Gra" value="Grande"> Grande </label>
                         <label class="radio-inline"><input type="radio" name="porte" id="rd_Medi" value="Médio"> Médio </label>
                         <label class="radio-inline"><input type="radio" name="porte" id="rd_Pe" value="Pequeno"> Pequeno </label>
-                        <label class="radio-inline"><input type="radio" name="porte" id="rd_Ns" value="Não Sei" checked> Não Sei </label>
+                        <label class="radio-inline"><input type="radio" name="porte" id="rd_Ns" value="Não Sei" checked/> Não Sei </label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -112,7 +112,7 @@
                         <label class="radio-inline"><input type="radio" name="idadePet" id="rd_Idoso" value="Idoso" />Idoso</label>
                         <label class="radio-inline"><input type="radio" name="idadePet" id="rd_Adulto" value="Adulto" />Adulto</label>
                         <label class="radio-inline"><input type="radio" name="idadePet" id="rd_Filhote" value="Filhote" />Filhote </label>
-                        <label class="radio-inline"><input type="radio" name="idadePet" id="rd_NS" value="Não Sei" checked/>Não Sei</label>
+						<label class="radio-inline"><input type="radio" name="idadePet" id="rd_NS" value="Não Sei" checked/>Não Sei</label>
                     </div>
                 </div>
 				<div class="form-group">
@@ -132,9 +132,9 @@
 				<div class="form-group">
                     <label class="control-label col-sm-2">Pet foi encontrado com machucados ou sinais de maus tratos?</label>
                     <div class="col-sm-8">
-                        <label class="radio-inline"><input type="radio" name="maustrat" id="rd_mtSim" value="Sim" />Sim</label>
-                        <label class="radio-inline"><input type="radio" name="maustrat" id="rd_mtNao" value="Não" />Não</label>
-                        <label class="radio-inline"><input type="radio" name="maustrat" id="rd_mtNS" value="Não Sei" checked/>Não Sei</label>
+                        <label class="radio-inline"><input type="radio" name="mausTrat" id="rd_mtSim" value="Sim" />Sim</label>
+                        <label class="radio-inline"><input type="radio" name="mausTrat" id="rd_mtNao" value="Não" />Não</label>
+                        <label class="radio-inline"><input type="radio" name="mausTrat" id="rd_mtNS" value="Não Sei" checked/>Não Sei</label>
                     </div>
                 </div>
 				<div class="form-group">
@@ -156,9 +156,9 @@
 				<div class="form-group">
                     <label class="control-label col-sm-2">Tipo de ajuda: </label>
                     <div class="col-sm-8">
-                        <label class="radio-inline"><input type="radio" name="tipoajuda" id="rd_adocao" value="adocao" />Adoção</label>
-                        <label class="radio-inline"><input type="radio" name="tipoajuda" id="rd_apadrinhamento" value="apadrinhamento" />Apadrinhamento</label>
-                        <label class="radio-inline"><input type="radio" name="tipoajuda" id="rd_ind" value="indife" checked/>Indiferente</label>
+                        <label class="radio-inline"><input type="radio" name="tipoajuda" id="rd_Adocao" value="adocao" />Adoção</label>
+                        <label class="radio-inline"><input type="radio" name="tipoajuda" id="rd_Apadri" value="apadrinhamento" />Apadrinhamento</label>
+                        <label class="radio-inline"><input type="radio" name="tipoajuda" id="rd_Indiferente" value="indife" checked/>Indiferente</label>
                     </div>
                 </div>
 				<div class="form-group">
@@ -187,13 +187,13 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2">Endereço:</label>
                     <div class="col-xs-4">
-                        <input type="text" class="form-control" id="endpet" name="endpet">
+                        <input type="text" class="form-control" id="txt_endpet" name="endpet">
                     </div>
                 </div>
 				<div class="form-group">
                     <label class="control-label col-sm-2">Descrição do local onde o Pet foi encontrado: </label>
 					<div class="col-sm-8">
-						<textarea name="info-pet" id="info-pet" rows="5" cols="40">Mais informações sobre o local</textarea>
+						<textarea name="desc-area" id="desc-area" rows="5" cols="40">Mais informações sobre o local</textarea>
 					</div>
                 </div>
                 <button type="submit" class="btn btn-default" style="margin-left:43%;">Enviar</button>
