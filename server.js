@@ -1,4 +1,4 @@
-const express = require('express');
+﻿const express = require('express');
 const bodyParser = require("body-parser");
 const MongoClient = require('mongodb').MongoClient;
 
@@ -32,6 +32,11 @@ app.get("/main-page.html", function(request, response){
 //FUNCIONAMENTO
 app.get("/como-funciona.html", function(request, response){
     response.render("como-funciona.ejs");
+});
+
+//LOGIN
+app.get("/login.html", function(request, response){
+    response.render("login.ejs");
 });
 
 //ADOTAR
