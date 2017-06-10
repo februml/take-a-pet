@@ -13,8 +13,6 @@ PetDAO.prototype.validate = function(userDict){
         throw 'No help provided';
     }else if(!userDict.date || userDict.date.lenght == 0){
         throw 'No date provided';
-    }else if(!userDict.region || userDict.region.lenght == 0){
-        throw 'No region provided';
     }else if(!userDict.address || userDict.address.lenght == 0){
         throw 'No address provided';
     }

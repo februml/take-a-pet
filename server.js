@@ -49,11 +49,12 @@ app.post("/cadastrarUsuario-action", function(request, response){
         name: request.body.nome,
         age: request.body.dataNascimento,
         email: request.body.email,
-        address: request.body.endereco
+        address: request.body.endereco,
+        phone: request.body.contato
     };
 
     try{
-        //UserDAO.validate(newUser);
+        UserDAO.validate(newUser);
         UserDAO.save(db, newUser);
         response.render("message.ejs", {message: "Usuário cadastrado com sucesso"});
     }catch (err){
@@ -89,9 +90,10 @@ app.post("/cadastrarPet-action", function(request, response){
         age: request.body.idadePet,
         date: request.body.data,
         address: request.body.endpet,
+        help: request.body.tipoajuda
     }
     try{
-        //PetDAO.validate(newPet);
+        PetDAO.validate(newPet);
         PetDAO.save(db, newPet);
         response.render("message.ejs", {message: "Pet cadastrado com sucesso"});
     }catch (err){
