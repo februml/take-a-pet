@@ -4,6 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 const UserDAO = require('./app/UserDAO');
 const PetDAO = require('./app/PetDAO');
+const LoginDAO = require('./app/LoginDAO');
 
 //configurando express aplicação
 const app = express();
@@ -39,6 +40,27 @@ app.get("/login.html", function(request, response){
     response.render("login.ejs");
 });
 
+app.post("/login-action", function(request, response){
+    var loginDict = {
+        username: request.body.username,
+        pass: request.body.senha
+    }
+    //validar
+    //validar se existe
+    try{
+        LoginDAO.validate(loginDict);
+        LoginDAO.findUserByNameAndPass(db, loginDict, function(err, user){
+            if (err){
+               response.render("Login.ejs", {message: "Erro ao fazer login: " + err}); 
+            }else{
+               response.render("index.ejs");
+            }
+        });
+    }catch (err){
+        response.render("Login.ejs", {message: "Erro ao fazer login: " + err});
+    }
+});
+
 //USUÁRIO
 app.get("/cadastrarUsuario.html", function(request, response){
     response.render("cadastrarUsuario.ejs");
@@ -47,6 +69,8 @@ app.get("/cadastrarUsuario.html", function(request, response){
 app.post("/cadastrarUsuario-action", function(request, response){
     var newUser = {
         name: request.body.nome,
+        username: request.body.username,
+        pass: request.body.senha,
         age: request.body.dataNascimento,
         email: request.body.email,
         address: request.body.endereco,

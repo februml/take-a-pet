@@ -15,7 +15,13 @@ var createPetDict = function(){
         address: "rua x, numero 123"
     };
 }
+//sucesso
+it('Should not trhow exception', function(){
+    let reqOpt = createPetDict();
+    PetDAO.validate(reqOpt);        
+});
 
+//errors
 it('Should trhow exception when validating user if no type', function(){
     let reqOpt = createPetDict();
     delete reqOpt.type;

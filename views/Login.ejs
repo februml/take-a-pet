@@ -73,13 +73,20 @@
     <!-- Form Section -->
     <section class="" id="">
        <div class="container">
+            <%if (locals.message){%>
+            <div class="row">
+                <div class="col-lg-12 text-center" style="margin-top: 40px; margin-bottom: 50px;">
+                    <h2><%=locals.message%></h2>
+                </div>
+            </div>
+            <%}%>
             <div class="row">
                 <div class="col-lg-12 text-center" style="margin-top: 40px; margin-bottom: 50px;">
                     <h3>Login</h3>
                     <hr class="star-primary">
                 </div>
             </div>
-            <form class="form-horizontal" method="post" action="cadastrarUsuario-action">
+            <form class="form-horizontal" method="post" action="login-action">
                 <div class="form-group">
                     <label class="control-label col-sm-2">Nome de Usuário:</label>
                     <div class="col-xs-4">
@@ -89,7 +96,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2">Senha:</label>
                     <div class="col-xs-4">
-                        <input type="text" class="form-control" id="senha" name="senha">
+                        <input type="password" class="form-control" id="senha" name="senha">
                     </div>
                 </div>
 

@@ -8,6 +8,8 @@ var UserDAO = require("../app/UserDAO");
 var createUserDict = function(){
     return {
         name: "UserName",
+        username: "username",
+        pass: "password",
         age: "20",
         phone: "51 33333333",
         email: "user@email.com",
@@ -16,6 +18,13 @@ var createUserDict = function(){
     };
 }
 
+//sucesso
+it('Should not trhow exception', function(){
+    let reqOpt = createUserDict();
+    UserDAO.validate(reqOpt);  
+});
+
+//erros
 it('Should trhow exception when validating user if no age', function(){
     let reqOpt = createUserDict();
     delete reqOpt.age;
@@ -68,4 +77,22 @@ it('Should trhow exception when validating user if no address', function(){
     expect(function(){
         UserDAO.validate(reqOpt);        
     }).to.throw("No address provided");    
+});
+
+it('Should trhow exception when validating user if no usernar', function(){
+    let reqOpt = createUserDict();
+    delete reqOpt.username;
+
+    expect(function(){
+        UserDAO.validate(reqOpt);        
+    }).to.throw("No username provided");  
+});
+
+it('Should trhow exception when validating user if no password', function(){
+    let reqOpt = createUserDict();
+    delete reqOpt.pass;
+
+    expect(function(){
+        UserDAO.validate(reqOpt);        
+    }).to.throw("No pass provided");  
 });
