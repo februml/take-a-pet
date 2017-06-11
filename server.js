@@ -1,4 +1,5 @@
 ﻿const express = require('express');
+const session = require('express-session');
 const bodyParser = require("body-parser");
 const MongoClient = require('mongodb').MongoClient;
 
@@ -14,20 +15,16 @@ var db = null;
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(session({secret: 'takeapet', resave: true, saveUninitialized: true}));
+
+app.use(function(request, response, next) {
+    response.locals.username = request.session.username;
+    next();
+});
 
 //HOME-PAGE
 app.get("/", function(request, response){
-    var obj = {
-        pageTitle: "TAKE A PET"
-    };
-    response.render("index.ejs", obj);
-});
-
-app.get("/main-page.html", function(request, response){
-    var obj = {
-        pageTitle: "TAKE A PET"
-    };
-    response.render("index.ejs", obj);
+    response.render("index.ejs");
 });
 
 //FUNCIONAMENTO
@@ -53,12 +50,22 @@ app.post("/login-action", function(request, response){
             if (err){
                response.render("Login.ejs", {message: "Erro ao fazer login: " + err}); 
             }else{
-               response.render("index.ejs");
+                let sess = request.session;
+                sess.username = user.username;
+                response.locals.username = user.username;
+                response.render("index.ejs");
             }
         });
     }catch (err){
         response.render("Login.ejs", {message: "Erro ao fazer login: " + err});
     }
+});
+
+//LOGOUT
+app.get("/logout-action", function(request, response){
+    request.session.username = null; //limpar sessão
+    response.locals.username = null;
+    response.render("Login.ejs", {message: "Deslogado com sucesso!"});
 });
 
 //USUÁRIO
@@ -89,7 +96,12 @@ app.post("/cadastrarUsuario-action", function(request, response){
 
 //PET
 app.get("/cadastrarPet.html", function(request, response){
-    response.render("cadastrarPet.ejs");
+    let sess = request.session;
+    if (sess.username){
+        response.render("cadastrarPet.ejs");
+    }else{
+        response.render("Login.ejs", {message: "Faça login ou cadastre-se para cadastrar um pet"});
+    }
 });
 
 app.get("/listarPets.html", function(request, response){
