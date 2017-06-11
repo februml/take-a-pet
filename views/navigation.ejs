@@ -6,7 +6,11 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="#page-top">Take a Pet!</a>
+            <%if (locals.isMain){%>
+                <a class="navbar-brand" href="#page-top">Take a Pet!</a>
+            <%}else{%>
+                <a class="navbar-brand" href="/">Take a Pet!</a>
+            <%}%>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -26,10 +30,18 @@
                 </li>
                 <%}%>
                 <li class="page-scroll">
+                    <%if (locals.isMain){%>
                     <a href="#portfolio">Recentes</a>
+                    <%}else{%>
+                    <a href="/#portfolio">Recentes</a>
+                    <%}%>
                 </li>
                 <li class="page-scroll">
+                    <%if (locals.isMain){%>
                     <a href="#sobre">O que é</a>
+                    <%}else{%>
+                    <a href="/#sobre">O que é</a>
+                    <%}%>
                 </li>
                 <li class="page-scroll">
                     <a href="cadastrarUsuario.html">Cadastre-se</a>

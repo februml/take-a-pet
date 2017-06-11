@@ -24,7 +24,9 @@ app.use(function(request, response, next) {
 
 //HOME-PAGE
 app.get("/", function(request, response){
-    response.render("index.ejs");
+    response.render("index.ejs", {
+        isMain: true
+    });
 });
 
 //FUNCIONAMENTO
