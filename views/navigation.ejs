@@ -19,16 +19,6 @@
                 <li class="hidden">
                     <a href="#page-top"></a>
                 </li>
-                <%if (locals.username){%>
-                <li class="page-scroll">
-                    <a href="logout-action">Logout</a>
-                </li>
-                <%}%>
-                <%if (!locals.username){%>
-                <li class="page-scroll">
-                    <a href="login.html">Login</a>
-                </li>
-                <%}%>
                 <li class="page-scroll">
                     <%if (locals.isMain){%>
                     <a href="#portfolio">Recentes</a>
@@ -54,6 +44,16 @@
                 <li class="page-scroll">
                     <a href="listarPets.html">Ver todos pets</a>
                 </li>
+                <%if (locals.username){%>
+                <li class="page-scroll">
+                    <a href="logout-action">Logout</a>
+                </li>
+                <%}%>
+                <%if (!locals.username){%>
+                <li class="page-scroll">
+                    <a href="login.html">Login</a>
+                </li>
+                <%}%>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
