@@ -139,6 +139,20 @@ app.post("/cadastrarPet-action", function(request, response){
     }
 });
 
+//404
+app.get("/404.html", function(request, response){
+    response.render("404.ejs");
+});
+
+//Volta pro index
+app.post("/voltar-action", function(request, response){
+	response.render("index.ejs");
+});
+
+//Redimensiona qualquer página que não existe para 404.ejs
+app.get('/*', function(request, response){
+   response.render('404', {});
+});
 
 //configurando o driver do Mongo
 MongoClient.connect('mongodb://admin:takeapet@ds119091.mlab.com:19091/takeapet', function(err, database){
