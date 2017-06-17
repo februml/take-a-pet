@@ -85,6 +85,7 @@ app.get("/cadastro-falha.html", function(request, response){
     response.render("cadastro-falha.ejs");
 });
 
+//CADASTRO USUÁRIO
 app.post("/cadastrarUsuario-action", function(request, response){
     var newUser = {
         name: request.body.nome,
@@ -137,6 +138,7 @@ app.get("/listarPets.html", function(request, response){
 
 app.post("/cadastrarPet-action", function(request, response){
     console.log(JSON.stringify(request.body));
+    let sess = request.session;
     var newPet = {
         type: request.body.espec,
         sex: request.body.sexo,
@@ -144,7 +146,8 @@ app.post("/cadastrarPet-action", function(request, response){
         age: request.body.idadePet,
         date: request.body.data,
         address: request.body.endpet,
-        help: request.body.tipoajuda
+        help: request.body.tipoajuda,
+        username: sess.username
     }
     try{
         PetDAO.validate(newPet);

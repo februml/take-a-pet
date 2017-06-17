@@ -47,10 +47,13 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th></th>
                                             <th>Espécie</th>
                                             <th>Sexo</th>
                                             <th>Porte</th>
+                                            <th>Responsável</th>
+                                            <th>Contato responsável</th>
+                                            <th>Endereço que o pet se encontra</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -60,6 +63,9 @@
                                                 <td><%= petList[i].type %></td>
                                                 <td><%= petList[i].sex %></td>
                                                 <td><%= petList[i].size %></td>
+                                                <td><%= petList[i].username %></td>
+                                                <td><%= petList[i].phone %></td>
+                                                <td><%= petList[i].address %></td>
                                             </tr>
                                         <%} %>
                                     </tbody>

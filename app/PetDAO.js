@@ -17,14 +17,21 @@ PetDAO.prototype.validate = function(userDict){
         throw 'No address provided';
     /*}else if(!userDict.region || userDict.region.lenght == 0){
         throw 'No region provided';*/
+    }else if(!userDict.username || userDict.username.lenght == 0){
+        throw 'No username on creating pet';
     }
 }
 
 PetDAO.prototype.save = function(db, newPet){
-    db.collection("pet").save(newPet, function(err){
-        if(err){
-            throw (err);
-        }
+     db.collection("user").findOne({
+        username: newPet.username
+    }, function(err, user){
+        newPet.phone = user.phone;
+        db.collection("pet").save(newPet, function(err){
+            if(err){
+                throw (err);
+            }
+        });
     });
 }
 

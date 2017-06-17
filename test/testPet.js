@@ -5,14 +5,15 @@ var PetDAO = require("../app/PetDAO");
 var createPetDict = function(){
     //just necessary fields
     return {
-        type: "E_C",
+        type: "E_C", //espécie
         sex: "Ma",
         size: "Gr",
         age: "Adulto",
         help: "Adocao",
         date: "15/01/2016",
         //region: "ZS",
-        address: "rua x, numero 123"
+        address: "rua x, numero 123",
+        username: "username"
     };
 }
 //sucesso
@@ -93,3 +94,13 @@ it('Should trhow exception when validating user if no address', function(){
         PetDAO.validate(reqOpt);        
     }).to.throw("No address provided");  
 });
+
+it('Should trhow exception when dont have username when creating pet', function(){
+    let reqOpt = createPetDict();
+    delete reqOpt.username;
+
+    expect(function(){
+        PetDAO.validate(reqOpt);        
+    }).to.throw("No username");  
+});
+
