@@ -75,6 +75,16 @@ app.get("/cadastrarUsuario.html", function(request, response){
     response.render("cadastrarUsuario.ejs");
 });
 
+//CADASTROU COM SUCESSO
+app.get("/cadastro-sucesso.html", function(request, response){
+    response.render("cadastro-sucesso.ejs");
+});
+
+//FALHA AO CADASTRAR
+app.get("/cadastro-falha.html", function(request, response){
+    response.render("cadastro-falha.ejs");
+});
+
 app.post("/cadastrarUsuario-action", function(request, response){
     var newUser = {
         name: request.body.nome,
@@ -89,11 +99,17 @@ app.post("/cadastrarUsuario-action", function(request, response){
     try{
         UserDAO.validate(newUser);
         UserDAO.save(db, newUser);
-        response.render("message.ejs", {message: "Usuário cadastrado com sucesso"});
+		//response.render("message.ejs", {message: "Usuário cadastrado com sucesso"});
+        response.render("cadastro-sucesso.ejs");
     }catch (err){
-        response.render("message.ejs", {message: "Erro ao cadastrar usuário: " + err});
+		//response.render("message.ejs", {message: "Erro ao cadastrar usuário: " + err});
+		response.render("cadastro-falha.ejs");
     }
 
+});
+
+app.post("/tentar-novo-cadastro", function(request, response){
+	response.render("cadastrarUsuario.ejs");
 });
 
 //PET
