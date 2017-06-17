@@ -39,4 +39,12 @@
         });
     });
 
+    // adiciona mensagem de erro dos campos required
+    $('input,textarea,select').filter('[required]:visible').attr('data-validation-required-message','Esse campo é obrigatório');
+
+    // faz a verificação dos campos required
+    $(function() {
+        $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+    } );
+
 })(jQuery); // End of use strict

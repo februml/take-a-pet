@@ -513,3 +513,12 @@ div#maincontent {
 .content {
   min-height: calc(100vh - 70px);
 }
+
+.formVertical {
+  display:flex;
+}
+
+.msgValidacao {
+  color: #ff0000;
+  font-size: medium;
+}
