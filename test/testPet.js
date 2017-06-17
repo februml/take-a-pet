@@ -11,7 +11,7 @@ var createPetDict = function(){
         age: "Adulto",
         help: "Adocao",
         date: "15/01/2016",
-        region: "ZS",
+        //region: "ZS",
         address: "rua x, numero 123"
     };
 }
@@ -75,7 +75,7 @@ it('Should trhow exception when validating user if no date', function(){
         PetDAO.validate(reqOpt);        
     }).to.throw("No date provided");  
 });
-
+/*
 it('Should trhow exception when validating user if no region', function(){
     let reqOpt = createPetDict();
     delete reqOpt.region;
@@ -83,7 +83,7 @@ it('Should trhow exception when validating user if no region', function(){
     expect(function(){
         PetDAO.validate(reqOpt);        
     }).to.throw("No region provided");  
-});
+});*/
 
 it('Should trhow exception when validating user if no address', function(){
     let reqOpt = createPetDict();

@@ -13,7 +13,7 @@ var createUserDict = function(){
         age: "20",
         phone: "51 33333333",
         email: "user@email.com",
-        region: "Zona",
+        //region: "Zona",
         address: "123 john street"
     };
 }
@@ -60,7 +60,7 @@ it('Should trhow exception when validating user if no email', function(){
         UserDAO.validate(reqOpt);        
     }).to.throw("No email provided");    
 });
-
+/*
 it('Should trhow exception when validating user if no region', function(){
     let reqOpt = createUserDict();
     delete reqOpt.region;
@@ -68,7 +68,7 @@ it('Should trhow exception when validating user if no region', function(){
     expect(function(){
         UserDAO.validate(reqOpt);        
     }).to.throw("No region provided");    
-});
+});*/
 
 it('Should trhow exception when validating user if no address', function(){
     let reqOpt = createUserDict();
