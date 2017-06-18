@@ -137,6 +137,18 @@ app.get("/listarPets.html", function(request, response){
 
 });
 
+app.get("/findPet/:petId", function(request, response){
+    try {
+         PetDAO.findByID(db, request.params.petId, function(petData) {
+            response.send(petData);
+            console.log(petData);
+         });
+    } catch (err) {
+        response.render("message.ejs", {message: "Erro ao listar pets: " + err});
+    }
+
+});
+
 app.post("/cadastrarPet-action", function(request, response){
     console.log(JSON.stringify(request.body));
     let sess = request.session;
@@ -153,7 +165,7 @@ app.post("/cadastrarPet-action", function(request, response){
     try{
         PetDAO.validate(newPet);
         PetDAO.save(db, newPet);
-        setTimeout(function(){
+        setTimeout(function() {
             PetDAO.findAll(db, function(pets){
                 response.render("listarPets.ejs", {
                     petList: pets

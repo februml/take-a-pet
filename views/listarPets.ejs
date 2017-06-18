@@ -29,54 +29,67 @@
     <!-- Navigation -->
     <%- include('navigation', locals); %>
 
-    <!-- Form Section -->
-    <section class="" id="">
-       <div class="container content">
+    <!-- Listagem dos pets -->
+    <section id="portfolio">
+        <div class="container content" >
             <div class="row">
                 <div class="col-lg-12 text-center" style="margin-top: 40px; margin-bottom: 50px;">
                     <h3>Veja todos os pets cadastrados!</h3>
                     <hr class="star-primary">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"></div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Espécie</th>
-                                            <th>Sexo</th>
-                                            <th>Porte</th>
-                                            <th>Responsável</th>
-                                            <th>Contato responsável</th>
-                                            <th>Endereço que o pet se encontra</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for (var i = 0; i < petList.length; i++){ %>
-                                            <tr>
-                                                <td><%= i %></td>
-                                                <td><%= petList[i].type %></td>
-                                                <td><%= petList[i].sex %></td>
-                                                <td><%= petList[i].size %></td>
-                                                <td><%= petList[i].username %></td>
-                                                <td class="phone"><%= petList[i].phone %></td>
-                                                <td><%= petList[i].address %></td>
-                                            </tr>
-                                        <%} %>
-                                    </tbody>
-                                </table>
+
+        <!-- percorre array de pets e monta o portfolio -->
+            <% for (var i = 0; i < petList.length; i++) { %>
+                <div class="col-sm-4 portfolio-item">
+                    <a name="modalPet" href="#portfolioModal" class="portfolio-link" data-toggle="modal" >
+                        <div class="caption" >
+                            <div class="caption-content" >
+                                <i class="fa fa-search-plus fa-3x" petId="<%= petList[i]._id %>"></i>
                             </div>
+                        </div>
+                        <img src="pictures/dogplaceholder.jpg" class="img-responsive" alt="">
+                    </a>
+                </div>
+            <% } %>
+        </div>
+    </section>
+
+    <!-- Modal do portfolio -->
+    <div class="portfolio-modal modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <h2>Informação do Pet</h2>
+                <hr class="star-primary">
+                <div class="row">
+                    <div class="modal-body">
+                        <div class="col-lg-6">
+                            <img src="pictures/dogplaceholder.jpg" class="img-responsive" alt="">
+                        </div>
+                        <div class="col-lg-6">
+                            <p id="tipo" class="alignModal"></p>
+                            <p id="sexo" class="alignModal"></p>
+                            <p id="tamanho" class="alignModal"></p>
+                            <p id="idade" class="alignModal"></p>
+                            <p id="data" class="alignModal"></p>
+                            <p id="endereco" class="alignModal"></p>
+                            <p id="cuidados" class="alignModal"></p>
+                            <p id="usuario" class="alignModal"></p>
+                            <p id="telefone" class="alignModal"></p>
+                            <p id="email" class="alignModal"></p>
                         </div>
                     </div>
                 </div>
             </div>
-       </div>
-    </section>
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Fechar</button>
+        </div>
+    </div>
 
     <% include footer.ejs %>
 
@@ -91,5 +104,33 @@
 
     <!-- Theme JavaScript -->
     <script src="js/freelancer.min.js"></script>
+
+    <script>
+        $(function(){
+            var elem = $("a[name='modalPet']"), petId;
+
+            elem.click(function(event) {
+                // pega o id do pet selecionado
+                if (event.target.nodeName == 'DIV') 
+                    petId = event.target.children[0].children[0].getAttribute('petId');
+                else 
+                    petId = event.target.getAttribute('petId');
+                    
+                // carrega os dados de acordo com o id
+                $.get('/findPet/' + petId, function(petData) {
+                    $('#tipo').html('Tipo: ' + petData.type);
+                    $('#sexo').html('Sexo: ' + petData.sex);
+                    $('#tamanho').html('Tamanho: ' + petData.size);
+                    $('#idade').html('Idade: ' + petData.age);
+                    $('#data').html('Data: ' + petData.date);
+                    $('#endereco').html('Endereço: ' + petData.address);
+                    $('#cuidados').html('Necessita de cuidados: ' + petData.help);
+                    $('#usuario').html('Usuário: ' + petData.username);
+                    $('#telefone').html('Telefone: ' + petData.phone);
+                    $('#email').html('Email: ' + petData.email);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
