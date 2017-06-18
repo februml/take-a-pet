@@ -154,11 +154,11 @@ app.post("/cadastrarPet-action", function(request, response){
         PetDAO.validate(newPet);
         PetDAO.save(db, newPet);
         setTimeout(function(){
-        PetDAO.findAll(db, function(pets){
-            response.render("listarPets.ejs", {
-                petList: pets
+            PetDAO.findAll(db, function(pets){
+                response.render("listarPets.ejs", {
+                    petList: pets
+                });
             });
-        });
         }, 100);
     }catch (err){
         response.render("message.ejs", {message: "Erro ao cadastrar pet: " + err});
