@@ -171,7 +171,7 @@ app.post("/cadastrarPet-action", function(request, response){
                     petList: pets
                 });
             });
-        }, 100);
+        }, 1000);
     }catch (err){
         response.render("message.ejs", {message: "Erro ao cadastrar pet: " + err});
     }
