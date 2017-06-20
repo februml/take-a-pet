@@ -156,45 +156,60 @@ app.get("/findPet/:petId", function(request, response){
 
 app.post("/cadastrarPet-action", function(request, response){
     console.log(JSON.stringify(request.body));
-
+	
+	/*
+	var picture_path = null;
     var form = new formidable.IncomingForm();
     form.parse(request);
     form.on('fileBegin', function (name, file)
     {
         file.path = __dirname + '/public/uploads/' + file.name;
+		picture_path = new String(file.path);
+		console.log("picture_path ainda dentro do form.on = " + picture_path);
     });
     form.on('file', function (name, file)
     {
         console.log('Uploaded ' + file.name);
     });
-
-
-    let sess = request.session;  
-    var newPet = {
-        type: request.body.espec,
-        sex: request.body.sexo,
-        size: request.body.porte,
-        age: request.body.idadePet,
-        date: request.body.data,
-        address: request.body.endpet,
-        help: request.body.tipoajuda,
-        picture: request.body.picture,
-        username: sess.username
-    }
-    console.log("/cadastrarPet-action " + request.body);
-    try{
-        PetDAO.validate(newPet);
-        PetDAO.save(db, newPet);
-        setTimeout(function() {
-            PetDAO.findAll(db, function(pets){
-                response.render("listarPets.ejs", {
-                    petList: pets
-                });
-            });
-        }, 1000);
-    }catch (err){
-        response.render("message.ejs", {message: "Erro ao cadastrar pet: " + err});
-    }
+	*/
+	
+		var form = new formidable.IncomingForm();
+		form.parse(request);
+		form.on('fileBegin', function (name, file)
+		{
+			file.path = __dirname + '/public/uploads/' + file.name;
+			let sess = request.session;  
+			var newPet = {
+				type: request.body.espec,
+				sex: request.body.sexo,
+				size: request.body.porte,
+				age: request.body.idadePet,
+				date: request.body.data,
+				address: request.body.endpet,
+				help: request.body.tipoajuda,
+				picturePath: file.path,
+				username: sess.username
+			}
+			console.log(newPet.picturePath);
+			try{
+				PetDAO.validate(newPet);
+				PetDAO.save(db, newPet);
+				setTimeout(function() {
+					PetDAO.findAll(db, function(pets){
+						response.render("listarPets.ejs", {
+							petList: pets
+						});
+					});
+				}, 1000);
+			}
+			catch (err){
+				response.render("message.ejs", {message: "Erro ao cadastrar pet: " + err});
+			}
+		});
+		form.on('file', function (name, file)
+		{
+			console.log('Uploaded ' + file.name);
+		});
 });
 
 //404
