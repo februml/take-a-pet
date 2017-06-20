@@ -1,4 +1,5 @@
 var PetDAO = function(){}
+var mongo = require('mongodb');
 
 PetDAO.prototype.validate = function(userDict){
     if(!userDict.type || userDict.type.lenght == 0){
@@ -27,6 +28,7 @@ PetDAO.prototype.save = function(db, newPet){
         username: newPet.username
     }, function(err, user){
         newPet.phone = user.phone;
+        newPet.email = user.email;
         db.collection("pet").save(newPet, function(err){
             if(err){
                 throw (err);
@@ -36,11 +38,23 @@ PetDAO.prototype.save = function(db, newPet){
 }
 
 PetDAO.prototype.findAll = function(db, callback){
-    db.collection("pet").find({}).toArray(function(err, results){
+    db.collection("pet").find({}, {_id: 1}).toArray(function(err, results){
         if(err){
             throw(err);
         }
         callback(results);
+    });
+}
+
+// carrega um pet de acordo com o id recebido
+PetDAO.prototype.findByID = function(db, petId, callback) {
+    var o_id = new mongo.ObjectID(petId);
+    db.collection("pet").findOne({_id:o_id}, function(err, result) {
+        if(err) {
+            throw(err);
+        }
+
+        callback(result);
     });
 }
 

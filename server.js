@@ -130,6 +130,7 @@ app.get("/cadastrarPet.html", function(request, response){
 app.get("/listarPets.html", function(request, response){
     try{
         let allPets = PetDAO.findAll(db, function(pets){
+            //console.log(JSON.stringify(pets));
             response.render("listarPets.ejs", {
                 petList: pets
             });
@@ -140,6 +141,18 @@ app.get("/listarPets.html", function(request, response){
 
 });
 
+
+app.get("/findPet/:petId", function(request, response){
+    try {
+         PetDAO.findByID(db, request.params.petId, function(petData) {
+            response.send(petData);
+            console.log(petData);
+         });
+    } catch (err) {
+        response.render("message.ejs", {message: "Erro ao listar pets: " + err});
+    }
+
+});
 
 app.post("/cadastrarPet-action", function(request, response){
     console.log(JSON.stringify(request.body));
@@ -172,7 +185,13 @@ app.post("/cadastrarPet-action", function(request, response){
     try{
         PetDAO.validate(newPet);
         PetDAO.save(db, newPet);
-        response.render("message.ejs", {message: "Pet cadastrado com sucesso"});
+        setTimeout(function() {
+            PetDAO.findAll(db, function(pets){
+                response.render("listarPets.ejs", {
+                    petList: pets
+                });
+            });
+        }, 1000);
     }catch (err){
         response.render("message.ejs", {message: "Erro ao cadastrar pet: " + err});
     }

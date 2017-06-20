@@ -522,3 +522,7 @@ div#maincontent {
   color: #ff0000;
   font-size: medium;
 }
+
+.alignModal {
+  text-align: left;
+}
