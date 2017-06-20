@@ -2,6 +2,7 @@
 const session = require('express-session');
 const bodyParser = require("body-parser");
 const MongoClient = require('mongodb').MongoClient;
+var formidable = require('formidable');
 
 const UserDAO = require('./app/UserDAO');
 const PetDAO = require('./app/PetDAO');
@@ -16,6 +17,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({secret: 'takeapet', resave: true, saveUninitialized: true}));
+
+
+
 
 app.use(function(request, response, next) {
     response.locals.username = request.session.username;
@@ -136,9 +140,23 @@ app.get("/listarPets.html", function(request, response){
 
 });
 
+
 app.post("/cadastrarPet-action", function(request, response){
     console.log(JSON.stringify(request.body));
-    let sess = request.session;
+
+    var form = new formidable.IncomingForm();
+    form.parse(request);
+    form.on('fileBegin', function (name, file)
+    {
+        file.path = __dirname + '/public/uploads/' + file.name;
+    });
+    form.on('file', function (name, file)
+    {
+        console.log('Uploaded ' + file.name);
+    });
+
+
+    let sess = request.session;  
     var newPet = {
         type: request.body.espec,
         sex: request.body.sexo,
@@ -147,8 +165,10 @@ app.post("/cadastrarPet-action", function(request, response){
         date: request.body.data,
         address: request.body.endpet,
         help: request.body.tipoajuda,
+        picture: request.body.picture,
         username: sess.username
     }
+    console.log("/cadastrarPet-action " + request.body);
     try{
         PetDAO.validate(newPet);
         PetDAO.save(db, newPet);
@@ -168,7 +188,7 @@ app.post("/voltar-action", function(request, response){
 	response.render("index.ejs");
 });
 
-//Redimensiona qualquer página que não existe para 404.ejs
+//Redireciona qualquer página que não existe para 404.ejs
 app.get('/*', function(request, response){
    response.render('404', {});
 });

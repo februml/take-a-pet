@@ -22,6 +22,9 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
+    <!-- Mostrar preview do upload da imagem do pet -->
+    
+
 </head>
 
 <body id="page-top" class="index">
@@ -38,7 +41,7 @@
                     <hr class="star-primary">
                 </div>
             </div>
-            <form class="form-horizontal" method="post" action="cadastrarPet-action" novalidate>
+            <form class="form-horizontal" method="post" enctype="multipart/form-data"  action="cadastrarPet-action" novalidate>
                 <div class="col-lg-12 col-lg-offset-2">
                     <div class="control-group formVertical">
                         <label class="control-label col-sm-2">Espécie: <span style="color:red">*</span></label>
@@ -177,8 +180,16 @@
                             <p class="help-block msgValidacao"></p>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-default" style="margin-left:43%;">Enviar</button>
+                    </div>
+                    <div class="control-group formVertical">
+                        <label class="control-label col-sm-2">Envie uma foto do pet:</label>
+                        <div class="col-sm-4">
+                            <input type="file" id="petPictureFile" name="picture" accept="image/jpeg, image/png" onchange="readURL(this);" required>
+                            <img id="petPicture" name="imagem" src="#" style="width:250px;height:250px;border:0px solid gray;"/>   
+                         </div>
+                    </div>
                 </div>
+                <button type="submit" class="btn btn-default" style="margin-left:43%;">Enviar</button>
             </form>
        </div>
     </section>
@@ -198,5 +209,40 @@
     <script src="js/freelancer.js"></script>
 
     <script src="js/jqBootstrapValidation.js"></script>
+
+
+    <script>
+        function readURL(input) 
+        {
+            if (input.files && input.files[0]) 
+            {
+                var reader = new FileReader();
+                reader.onload = function (e) 
+                { 
+                    var image = new Image();
+                    image.src = e.target.result;
+
+                    image.onload = function () 
+                    {
+                        var height = this.height;
+                        var width = this.width;
+                        if (height > 250 || width > 250) 
+                        {
+                            alert("A altura e a largura da foto não devem exceder 250px!");
+                        }
+                        else 
+                        {
+                            var img = document.getElementById("petPicture");
+                            img.src = e.target.result;
+                        }
+                    };
+                };
+
+                reader.readAsDataURL(input.files[0]);   
+            }
+        }
+    </script>
+
 </body>
+
 </html>

@@ -2,7 +2,7 @@ var PetDAO = function(){}
 
 PetDAO.prototype.validate = function(userDict){
     if(!userDict.type || userDict.type.lenght == 0){
-        throw 'No type provided';
+        //throw 'No type provided';
     }else if(!userDict.sex || userDict.sex.lenght == 0){
         throw 'No sex provided';
     }else if(!userDict.size || userDict.size.lenght == 0){
