@@ -180,18 +180,17 @@
                             <p class="help-block msgValidacao"></p>
                         </div>
                     </div>
-                    </div>
                     <div class="control-group formVertical">
                         <label class="control-label col-sm-2">Envie uma foto do pet:</label>
                         <div class="col-sm-4">
-                            <input type="file" id="petPictureFile" name="picture" accept="image/jpeg, image/png" onchange="readURL(this);" required>
-                            <img id="petPicture" name="imagem" src="#" style="width:250px;height:250px;border:0px solid gray;"/>   
+                            <input type="file" class="form-control" id="petPictureFile" name="picture" accept="image/jpeg, image/png" onchange="readURL(this);" required>
+                            <img id="petPicture" class="form-control" name="imagem" src="#" style="width:250px;height:250px;border:0px solid gray;"/>   
                          </div>
                     </div>
-                </div>
+				</div>
                 <button type="submit" class="btn btn-default" style="margin-left:43%;">Enviar</button>
             </form>
-       </div>
+        </div>
     </section>
 
     <% include footer.ejs %>
