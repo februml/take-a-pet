@@ -46,47 +46,29 @@
         </div>
     </header>
 
-    <!-- Portfolio Grid Section -->
+    <!-- Listagem dos pets -->
     <section id="portfolio">
-        <div class="container">
+        <div class="container content" >
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Adicionados Recentemente</h2>
+                <div class="col-lg-12 text-center" style="margin-top: 40px; margin-bottom: 50px;">
+                    <h3>Veja todos os pets cadastrados!</h3>
                     <hr class="star-primary">
                 </div>
             </div>
-            <div class="row">
+
+        <!-- percorre array de pets e monta o portfolio -->
+            <% for (var i = 0; i < petList.length; i++) { %>
                 <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
+                    <a name="modalPet" href="#portfolioModal" class="portfolio-link" data-toggle="modal" >
+                        <div class="caption" >
+                            <div class="caption-content" >
+                                <i class="fa fa-search-plus fa-3x" petId="<%= petList[i]._id %>"></i>
                             </div>
                         </div>
                         <img src="pictures/dogplaceholder.jpg" class="img-responsive" alt="">
                     </a>
                 </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="pictures/dogplaceholder.jpg" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="pictures/dogplaceholder.jpg" class="img-responsive" alt="">
-                    </a>
-                </div>
-            </div>
+            <% } %>
         </div>
     </section>
 
@@ -124,8 +106,8 @@
         </a>
     </div>
 
-    <!-- Portfolio Modals -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Modal do portfolio -->
+    <div class="portfolio-modal modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
@@ -134,133 +116,29 @@
                 </div>
             </div>
             <div class="container">
+                <h2>Informação do Pet</h2>
+                <hr class="star-primary">
                 <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Informação do Pet</h2>
-                            <hr class="star-primary">
-                            <img src="pictures/dogplaceholder.jpg" class="img-responsive img-centered" alt="">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum dicta repudiandae, itaque possimus sapiente incidunt illo quas molestiae rem quae deleniti repellat quisquam, maiores facere distinctio nihil, repellendus cupiditate tempore.</p>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    <div class="modal-body">
+                        <div class="col-lg-6">
+                            <img src="pictures/dogplaceholder.jpg" class="img-responsive" alt="">
+                        </div>
+                        <div class="col-lg-6">
+                            <p id="tipo" class="alignModal"></p>
+                            <p id="sexo" class="alignModal"></p>
+                            <p id="tamanho" class="alignModal"></p>
+                            <p id="idade" class="alignModal"></p>
+                            <p id="data" class="alignModal"></p>
+                            <p id="endereco" class="alignModal"></p>
+                            <p id="cuidados" class="alignModal"></p>
+                            <p id="usuario" class="alignModal"></p>
+                            <p id="telefone" class="alignModal"></p>
+                            <p id="email" class="alignModal"></p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Informação do Pet</h2>
-                            <hr class="star-primary">
-                            <img src="pictures/dogplaceholder.jpg" class="img-responsive img-centered" alt="">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum dicta repudiandae, itaque possimus sapiente incidunt illo quas molestiae rem quae deleniti repellat quisquam, maiores facere distinctio nihil, repellendus cupiditate tempore.</p>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Informação do Pet</h2>
-                            <hr class="star-primary">
-                            <img src="pictures/dogplaceholder.jpg" class="img-responsive img-centered" alt="">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum dicta repudiandae, itaque possimus sapiente incidunt illo quas molestiae rem quae deleniti repellat quisquam, maiores facere distinctio nihil, repellendus cupiditate tempore.</p>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Informação do Pet</h2>
-                            <hr class="star-primary">
-                            <img src="pictures/dogplaceholder.jpg" class="img-responsive img-centered" alt="">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum dicta repudiandae, itaque possimus sapiente incidunt illo quas molestiae rem quae deleniti repellat quisquam, maiores facere distinctio nihil, repellendus cupiditate tempore.</p>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Informação do Pet</h2>
-                            <hr class="star-primary">
-                            <img src="pictures/dogplaceholder.jpg" class="img-responsive img-centered" alt="">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum dicta repudiandae, itaque possimus sapiente incidunt illo quas molestiae rem quae deleniti repellat quisquam, maiores facere distinctio nihil, repellendus cupiditate tempore.</p>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Informação do Pet</h2>
-                            <hr class="star-primary">
-                            <img src="pictures/dogplaceholder.jpg" class="img-responsive img-centered" alt="">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum dicta repudiandae, itaque possimus sapiente incidunt illo quas molestiae rem quae deleniti repellat quisquam, maiores facere distinctio nihil, repellendus cupiditate tempore.</p>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Fechar</button>
         </div>
     </div>
 
@@ -275,6 +153,34 @@
 
     <!-- Theme JavaScript -->
     <script src="js/freelancer.min.js"></script>
+
+    <script>
+        $(function(){
+            var elem = $("a[name='modalPet']"), petId;
+
+            elem.click(function(event) {
+                // pega o id do pet selecionado
+                if (event.target.nodeName == 'DIV') 
+                    petId = event.target.children[0].children[0].getAttribute('petId');
+                else 
+                    petId = event.target.getAttribute('petId');
+                    
+                // carrega os dados de acordo com o id
+                $.get('/findPet/' + petId, function(petData) {
+                    $('#tipo').html('Tipo: ' + petData.type);
+                    $('#sexo').html('Sexo: ' + petData.sex);
+                    $('#tamanho').html('Tamanho: ' + petData.size);
+                    $('#idade').html('Idade: ' + petData.age);
+                    $('#data').html('Data: ' + petData.date);
+                    $('#endereco').html('Endereço: ' + petData.address);
+                    $('#cuidados').html('Necessita de cuidados: ' + petData.help);
+                    $('#usuario').html('Usuário: ' + petData.username);
+                    $('#telefone').html('Telefone: ' + petData.phone);
+                    $('#email').html('Email: ' + petData.email);
+                });
+            });
+        });
+    </script>
 
 </body>
 

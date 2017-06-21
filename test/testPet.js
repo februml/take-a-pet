@@ -95,15 +95,6 @@ it('Should trhow exception when validating user if no address', function(){
     }).to.throw("No address provided");  
 });
 
-it('Should trhow exception when validating user if no pet image', function(){
-    let reqOpt = createPetDict();
-    delete reqOpt.imagem;
-
-    expect(function(){
-        PetDAO.validate(reqOpt);        
-    }).to.throw("No pet image provided");  
-});
-
 it('Should trhow exception when dont have username when creating pet', function(){
     let reqOpt = createPetDict();
     delete reqOpt.username;

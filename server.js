@@ -2,7 +2,6 @@
 const session = require('express-session');
 const bodyParser = require("body-parser");
 const MongoClient = require('mongodb').MongoClient;
-var formidable = require('formidable');
 
 const UserDAO = require('./app/UserDAO');
 const PetDAO = require('./app/PetDAO');
@@ -18,9 +17,6 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({secret: 'takeapet', resave: true, saveUninitialized: true}));
 
-
-
-
 app.use(function(request, response, next) {
     response.locals.username = request.session.username;
     next();
@@ -28,9 +24,17 @@ app.use(function(request, response, next) {
 
 //HOME-PAGE
 app.get("/", function(request, response){
-    response.render("index.ejs", {
-        isMain: true
-    });
+    try{
+        let allPets = PetDAO.findRecent(db, function(pets){
+            //console.log(JSON.stringify(pets));
+            response.render("index.ejs", {
+                isMain: true,
+                petList: pets
+            });
+        });
+    }catch (err){
+        response.render("message.ejs", {message: "Erro ao listar pets: " + err});
+    }
 });
 
 //FUNCIONAMENTO
@@ -59,7 +63,7 @@ app.post("/login-action", function(request, response){
                 let sess = request.session;
                 sess.username = user.username;
                 response.locals.username = user.username;
-                response.render("index.ejs");
+                response.redirect("/");
             }
         });
     }catch (err){
@@ -141,7 +145,6 @@ app.get("/listarPets.html", function(request, response){
 
 });
 
-
 app.get("/findPet/:petId", function(request, response){
     try {
          PetDAO.findByID(db, request.params.petId, function(petData) {
@@ -156,60 +159,30 @@ app.get("/findPet/:petId", function(request, response){
 
 app.post("/cadastrarPet-action", function(request, response){
     console.log(JSON.stringify(request.body));
-	
-	/*
-	var picture_path = null;
-    var form = new formidable.IncomingForm();
-    form.parse(request);
-    form.on('fileBegin', function (name, file)
-    {
-        file.path = __dirname + '/public/uploads/' + file.name;
-		picture_path = new String(file.path);
-		console.log("picture_path ainda dentro do form.on = " + picture_path);
-    });
-    form.on('file', function (name, file)
-    {
-        console.log('Uploaded ' + file.name);
-    });
-	*/
-	
-		var form = new formidable.IncomingForm();
-		form.parse(request);
-		form.on('fileBegin', function (name, file)
-		{
-			file.path = __dirname + '/public/uploads/' + file.name;
-			let sess = request.session;  
-			var newPet = {
-				type: request.body.espec,
-				sex: request.body.sexo,
-				size: request.body.porte,
-				age: request.body.idadePet,
-				date: request.body.data,
-				address: request.body.endpet,
-				help: request.body.tipoajuda,
-				picturePath: file.path,
-				username: sess.username
-			}
-			console.log(newPet.picturePath);
-			try{
-				PetDAO.validate(newPet);
-				PetDAO.save(db, newPet);
-				setTimeout(function() {
-					PetDAO.findAll(db, function(pets){
-						response.render("listarPets.ejs", {
-							petList: pets
-						});
-					});
-				}, 1000);
-			}
-			catch (err){
-				response.render("message.ejs", {message: "Erro ao cadastrar pet: " + err});
-			}
-		});
-		form.on('file', function (name, file)
-		{
-			console.log('Uploaded ' + file.name);
-		});
+    let sess = request.session;
+    var newPet = {
+        type: request.body.espec,
+        sex: request.body.sexo,
+        size: request.body.porte,
+        age: request.body.idadePet,
+        date: request.body.data,
+        address: request.body.endpet,
+        help: request.body.tipoajuda,
+        username: sess.username
+    }
+    try{
+        PetDAO.validate(newPet);
+        PetDAO.save(db, newPet);
+        setTimeout(function() {
+            PetDAO.findAll(db, function(pets){
+                response.render("listarPets.ejs", {
+                    petList: pets
+                });
+            });
+        }, 1000);
+    }catch (err){
+        response.render("message.ejs", {message: "Erro ao cadastrar pet: " + err});
+    }
 });
 
 //404
@@ -222,7 +195,7 @@ app.post("/voltar-action", function(request, response){
 	response.render("index.ejs");
 });
 
-//Redireciona qualquer página que não existe para 404.ejs
+//Redimensiona qualquer página que não existe para 404.ejs
 app.get('/*', function(request, response){
    response.render('404', {});
 });
