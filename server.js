@@ -192,7 +192,7 @@ app.get("/404.html", function(request, response){
 
 //Volta pro index
 app.post("/voltar-action", function(request, response){
-	response.render("index.ejs");
+	response.redirect("/");
 });
 
 //Redimensiona qualquer página que não existe para 404.ejs
