@@ -3,7 +3,7 @@ var mongo = require('mongodb');
 
 PetDAO.prototype.validate = function(userDict){
     if(!userDict.type || userDict.type.lenght == 0){
-        throw 'No type provided';
+        //throw 'No type provided';
     }else if(!userDict.sex || userDict.sex.lenght == 0){
         throw 'No sex provided';
     }else if(!userDict.size || userDict.size.lenght == 0){
@@ -45,17 +45,6 @@ PetDAO.prototype.findAll = function(db, callback){
         callback(results);
     });
 }
-
-PetDAO.prototype.findRecent = function(db, callback){
-    db.collection("pet").find().sort({_id:-1}).limit(6).toArray(function(err, results){
-        if(err){
-            throw(err);
-        }
-        callback(results);
-    });
-}
-
-//find().sort({_id:-1}).limit(2).pretty()
 
 // carrega um pet de acordo com o id recebido
 PetDAO.prototype.findByID = function(db, petId, callback) {
