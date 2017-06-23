@@ -11,7 +11,7 @@ var createUserDict = function(){
         username: "username",
         pass: "password",
         age: "20",
-        phone: "51 33333333",
+        //phone: "51 33333333",
         email: "user@email.com",
         //region: "Zona",
         address: "123 john street"
@@ -42,7 +42,7 @@ it('Should trhow exception when validating user if no name', function(){
         UserDAO.validate(reqOpt);        
     }).to.throw("No name provided");    
 });
-
+/*
 it('Should trhow exception when validating user if no phone', function(){
     let reqOpt = createUserDict();
     delete reqOpt.phone;
@@ -50,7 +50,7 @@ it('Should trhow exception when validating user if no phone', function(){
     expect(function(){
         UserDAO.validate(reqOpt);        
     }).to.throw("No phone provided");    
-});
+});*/
 
 it('Should trhow exception when validating user if no email', function(){
     let reqOpt = createUserDict();
