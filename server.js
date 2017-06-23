@@ -41,6 +41,10 @@ app.get("/", function(request, response){
 app.get("/como-funciona.html", function(request, response){
     response.render("como-funciona.ejs");
 });
+//PRIMEIROS SOCORROS
+app.get("/primeirosSocorros.html", function(request, response){
+    response.render("primeirosSocorros.ejs");
+});
 
 //LOGIN
 app.get("/login.html", function(request, response){
