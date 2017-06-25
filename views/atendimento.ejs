@@ -32,44 +32,71 @@
     <!-- Form Section -->
     <section class="" id="">
        <div class="container content" >
-            <%if (locals.message){%>
-            <div class="row">
-                <div class="col-push-8 text-center" style="margin-top: 40px; margin-bottom: 30px;">
-                    <h3><%=locals.message%></h3>
-                </div>
-            </div>
-            <%}%>
             <div class="row">
                 <div class="col-lg-12 text-center" style="margin-top: 30px; margin-bottom: 25px;">
-                    <h3>Login</h3>
+                    <h3>Locais para atendimento veterinário gratuito e/ou à baixo custo</h3>
                     <hr class="star-primary">
                 </div>
             </div>
-            <form class="form-horizontal" method="post" action="login-action" novalidate>
-                <div class="col-lg-12 col-lg-offset-2">
-                    <div class="control-group formVertical">
-                        <label class="control-label col-sm-2">Nome de Usuário:</label>
-                        <div class="col-xs-4">
-                            <input type="text" class="form-control" id="username" name="username" required />
-                            <p class="help-block msgValidacao"></p>
-                        </div>
-                    </div>
-                    <div class="control-group formVertical">
-                        <label class="control-label col-sm-2">Senha:</label>
-                        <div class="col-xs-4">
-                            <input type="password" class="form-control" id="senha" name="senha" required />
-                            <p class="help-block msgValidacao"></p>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-default" style="margin-left:43%;">Entrar</button>
-					
-					<div class="col-lg-11 col-lg-offset-1" style="margin-top: 50px;margin-left:8%;">
-						<label class="control-label col-sm-5" style="font-size:17px;">Ainda não é cadastrado? <a href="cadastrarUsuario.html"> Cadastre-se! </a></label>
+      
+			<div class="col-lg-10 col-lg-offset-1">
+				<div class="control-group formVertical">
+					<div class="col-lg-offset-1" style="margin-bottom: 20px;">
+						<img src="pictures/right-arrow.png" height="45px" width="45px" alt="">
+						<span style=" font-size: 19px;">Porto Alegre</span>
 					</div>
+				</div>
+				
+				<div class="control-group formVertical">
+					<div class="col-lg-offset-1" style="margin-bottom: 10px;">
+						<img src="pictures/PATA.png" height="45px" width="45px" alt="">
+						<span style=" font-size: 19px;">SEDA (Secretaria Especial dos Direitos Animais)</span>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;">Endereço: Praça Montevidéo, 10 - 1º andar CEP: 90010-170. Telefone: (51) 3289.3666.</p>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;">Site: <a href="http://www2.portoalegre.rs.gov.br/seda/">http://www2.portoalegre.rs.gov.br/seda/. </a> E-mail: imprensa@seda.prefpoa.com.br.</p>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;"> Dúvidas sobre atendimentos solicitados: 156seda@seda.prefpoa.com.br.</p>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;">Facebook: <a href="https://www.facebook.com/sedapoa">https://www.facebook.com/sedapoa.</a></p>
+					</div>
+				</div>
+				<div class="control-group formVertical">
+					<div class="col-lg-offset-1" style="margin-bottom: 10px;">
+						<img src="pictures/PATA.png" height="45px" width="45px" alt="">
+						<span style=" font-size: 19px;"> ARPA - Associação Riograndense de Proteção aos Animais</span>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;">Endereço:  Rua Professor Freitas e Castro, nº 172, Azenha - Porto Alegre/RS. Telefone: (51) 3223-1914.</p>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;">Email: arpa_rs@hotmail.com.</p>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;">Horários: de Segunda a Sexta-Feira das 9h30 às 12h e das 13h30 às 17h30 e aos Sábados das 9h30 às 13h.</p>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;">Facebook: <a href=" https://www.facebook.com/arpa.protetora"> https://www.facebook.com/arpa.protetora.</a></p>
+					</div>
+				</div>
+				<div class="control-group formVertical">
+					<div class="col-lg-offset-1" style="margin-bottom: 10px;">
+						<img src="pictures/PATA.png" height="45px" width="45px" alt="">
+						<span style=" font-size: 19px;">ZOOMED Clínica Veterinária</span>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;">Endereço:  Avenida Benno Mentz, 1368 - Vila Ipiranga. Porto Alegre/RS. Telefones: (51) 3347-4643(51)ou 9873-5931.</p>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;">Site: <a href="http://www.clinicazoomed.com.br">http://www.clinicazoomed.com.br. </a> Email: contato@clinicazoomed.com.br.</p>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;">Horários: De Segunda a Sexta-feira das 8h às 20h e Sábados das 9h às 17h.</p>
+					</div>
+				</div>
+				
+				<!-- https://pt-br.facebook.com/notes/ado%C3%A7%C3%A3o-animal-rs/lista-de-veterin%C3%A1rios-a-pre%C3%A7os-acess%C3%ADveis-parceiros-da-causa-animal-no-estado-do/526332024057707/-->
+				<div class="control-group formVertical">
+					<div class="col-lg-offset-1" style="margin-bottom: 20px;">
+						<img src="pictures/right-arrow.png" height="45px" width="45px" alt="">
+						<span style=" font-size: 19px;">Canoas</span>
+					</div>
+				</div>
+				
+				<div class="control-group formVertical">
+					<div class="col-lg-offset-1" style="margin-bottom: 10px;">
+						<img src="pictures/PATA.png" height="45px" width="45px" alt="">
+						<span style=" font-size: 19px;">Clínica Veterinária Bicho Feliz</span>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;">Endereço:  Rua Aluysio Jacobs, 380 - Bairro Fatima. Canoas/RS. Telefone: (51) 3077-3444.</p>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;">E-mail: clinica@clinicabichofeliz.com.br. Plantão 24hrs.</p>
+						<p style="margin-top:-15px; font-size: 15px; margin-left:45px;">Facebook: <a href="https://www.facebook.com/bichofelizcanoas">https://www.facebook.com/bichofelizcanoas.</a></p>
+					</div>
+				</div>
 					
-					
-                </div>
-            </form>
+            </div>
+            
        </div>
     </section>
 
