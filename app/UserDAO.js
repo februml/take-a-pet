@@ -20,11 +20,28 @@ UserDAO.prototype.validate = function(userDict){
     }
 }
 
-UserDAO.prototype.save = function(db, newUser){
+UserDAO.prototype.save = function(db, newUser, callback){
     db.collection("user").save(newUser, function(err){
         if(err){
             throw (err);
+        }else{
+            callback(newUser);
         }
     });
 }
+
+UserDAO.prototype.findUserByName = function(db, username, callback){
+    db.collection("user").findOne({
+        username: username
+    }, function(err, user){
+        if (err){
+            callback (err);
+        }else if (!user){
+            callback(null);
+        }else{
+            callback(user);
+        }
+    });
+}
+
 module.exports = new UserDAO();

@@ -19,6 +19,7 @@ app.use(session({secret: 'takeapet', resave: true, saveUninitialized: true}));
 
 app.use(function(request, response, next) {
     response.locals.username = request.session.username;
+    response.locals.name = request.session.name;
     next();
 });
 
@@ -66,6 +67,7 @@ app.post("/login-action", function(request, response){
             }else{
                 let sess = request.session;
                 sess.username = user.username;
+                sess.name = user.name;
                 response.locals.username = user.username;
                 response.redirect("/");
             }
@@ -79,6 +81,8 @@ app.post("/login-action", function(request, response){
 app.get("/logout-action", function(request, response){
     request.session.username = null; //limpar sessão
     response.locals.username = null;
+    request.session.name = null; //limpar sessão
+    response.locals.name = null;
     response.render("Login.ejs", {message: "Deslogado com sucesso!"});
 });
 
@@ -108,17 +112,26 @@ app.post("/cadastrarUsuario-action", function(request, response){
         address: request.body.endereco,
         phone: request.body.contato
     };
-
-    try{
-        UserDAO.validate(newUser);
-        UserDAO.save(db, newUser);
-		//response.render("message.ejs", {message: "Usuário cadastrado com sucesso"});
-        response.render("cadastro-sucesso.ejs");
-    }catch (err){
-		//response.render("message.ejs", {message: "Erro ao cadastrar usuário: " + err});
-		response.render("cadastro-falha.ejs");
-    }
-
+    UserDAO.findUserByName(db, request.body.username, function(existingUser){
+        if(existingUser){
+            response.render("cadastro-falha.ejs", {
+                message: "Usuário já existente com este username"
+            });
+        }else{
+            try{
+                UserDAO.validate(newUser);
+                UserDAO.save(db, newUser, function(user){
+                    let sess = request.session;
+                    sess.username = user.username;
+                    sess.name = user.name;
+                    response.redirect("/");
+                });
+            }catch (err){
+                //response.render("message.ejs", {message: "Erro ao cadastrar usuário: " + err});
+                response.render("cadastro-falha.ejs");
+            }
+        }
+    });
 });
 
 app.post("/tentar-novo-cadastro", function(request, response){
@@ -172,7 +185,8 @@ app.post("/cadastrarPet-action", function(request, response){
         date: request.body.data,
         address: request.body.endpet,
         help: request.body.tipoajuda,
-        username: sess.username
+        username: sess.username,
+        name: sess.name
     }
     try{
         PetDAO.validate(newPet);
