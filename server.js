@@ -42,9 +42,15 @@ app.get("/", function(request, response){
 app.get("/como-funciona.html", function(request, response){
     response.render("como-funciona.ejs");
 });
+
 //PRIMEIROS SOCORROS
 app.get("/primeirosSocorros.html", function(request, response){
     response.render("primeirosSocorros.ejs");
+});
+
+//ATENDIMENTOS
+app.get("/atendimento.html", function(request, response){
+    response.render("atendimento.ejs");
 });
 
 //LOGIN
