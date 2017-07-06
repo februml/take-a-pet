@@ -122,7 +122,7 @@
                     $('#sexo').html('Sexo: ' + petData.sex);
                     $('#tamanho').html('Tamanho: ' + petData.size);
                     $('#idade').html('Idade: ' + petData.age);
-                    $('#data').html('Data: ' + petData.date);
+                    $('#data').html('Data: ' + formatDate(petData.date));
                     $('#endereco').html('Endereço: ' + petData.address);
                     $('#cuidados').html('Necessita de cuidados: ' + petData.help);
                     $('#usuario').html('Usuário: ' + petData.name);
@@ -131,6 +131,12 @@
                 });
             });
         });
+
+        function formatDate(data) {
+            var oldDate = new Date(data);
+            var newDate =  oldDate.getDate() + '/' + (oldDate.getMonth() + 1) + '/' + oldDate.getFullYear();
+            return newDate;
+        }
     </script>
 </body>
 </html>
