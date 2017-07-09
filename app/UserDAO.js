@@ -44,4 +44,30 @@ UserDAO.prototype.findUserByName = function(db, username, callback){
     });
 }
 
+UserDAO.prototype.findUserAndPetsByName = function(db, username, callback) {
+    db.collection("user").aggregate([
+        { $match: {
+             username: username
+            }
+        },
+        { $lookup:
+            {
+                from:"pet",
+                localField:"username",
+                foreignField:"username",
+                as:"user_pets"
+            }
+        }
+    ],
+    function(err, user) {
+        if (err){
+            callback (err);
+        }else if (!user){
+            callback(null);
+        }else{
+            callback(user);
+        }
+    });
+}
+
 module.exports = new UserDAO();

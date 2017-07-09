@@ -144,6 +144,20 @@ app.post("/tentar-novo-cadastro", function(request, response){
 	response.render("cadastrarUsuario.ejs");
 });
 
+app.get("/exibirUsuario.html", function(request, response){
+    let username = request.session.username;
+    try {
+        let userData = UserDAO.findUserAndPetsByName(db, username, function(user) {
+            console.log(JSON.stringify(user));
+            response.render("exibirUsuario.ejs", {
+                userInfo: user
+            });
+        });
+    } catch(err) {
+        response.render("message.ejs", {message: "Erro ao carregar usuário: " + err});
+    }
+});
+
 //PET
 app.get("/cadastrarPet.html", function(request, response){
     let sess = request.session;
@@ -171,8 +185,8 @@ app.get("/listarPets.html", function(request, response){
 app.get("/findPet/:petId", function(request, response){
     try {
          PetDAO.findByID(db, request.params.petId, function(petData) {
+            //console.log(petData);
             response.send(petData);
-            console.log(petData);
          });
     } catch (err) {
         response.render("message.ejs", {message: "Erro ao listar pets: " + err});
@@ -181,7 +195,7 @@ app.get("/findPet/:petId", function(request, response){
 });
 
 app.post("/cadastrarPet-action", function(request, response){
-    console.log(JSON.stringify(request.body));
+    //console.log(JSON.stringify(request.body));
     let sess = request.session;
     var newPet = {
         type: request.body.espec,
