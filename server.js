@@ -196,14 +196,17 @@ app.post("/cadastrarPet-action", function(request, response){
     }
     try{
         PetDAO.validate(newPet);
-        PetDAO.save(db, newPet);
-        setTimeout(function() {
-            PetDAO.findAll(db, function(pets){
-                response.render("listarPets.ejs", {
-                    petList: pets
+
+        UserDAO.findUserByName(db, newPet.username, function(user){
+            PetDAO.save(db, newPet, user);
+            setTimeout(function() {
+                PetDAO.findAll(db, function(pets){
+                    response.render("listarPets.ejs", {
+                        petList: pets
+                    });
                 });
-            });
-        }, 1000);
+            }, 1000);
+        });
     }catch (err){
         response.render("message.ejs", {message: "Erro ao cadastrar pet: " + err});
     }

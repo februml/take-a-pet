@@ -31,12 +31,13 @@ describe("Login tests", function(){
 
         LoginDAO.findUserByNameAndPass(db, dict);
 
+        //verifica se o banco foi chamado corretamente
         sinon.assert.calledWith(collectionMock, "user");
         sinon.assert.calledWith(findOneMock, dict);
     });
 
     //sucesso
-    it('Should not trhow exception when validating with all required parameters', function(){
+    it('Should not trhow exception when validating with ALL required parameters', function(){
         let reqOpt = createLoginDict();
         LoginDAO.validate(reqOpt);  
     });

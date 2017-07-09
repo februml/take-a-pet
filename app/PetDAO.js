@@ -23,17 +23,13 @@ PetDAO.prototype.validate = function(userDict){
     }
 }
 
-PetDAO.prototype.save = function(db, newPet){
-     db.collection("user").findOne({
-        username: newPet.username
-    }, function(err, user){
-        newPet.phone = user.phone;
-        newPet.email = user.email;
-        db.collection("pet").save(newPet, function(err){
-            if(err){
-                throw (err);
-            }
-        });
+PetDAO.prototype.save = function(db, newPet, user){
+    newPet.phone = user.phone;
+    newPet.email = user.email;
+    db.collection("pet").save(newPet, function(err){
+        if(err){
+            throw (err);
+        }
     });
 }
 

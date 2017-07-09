@@ -5,94 +5,134 @@ var UserDAO = require("../app/UserDAO");
 //const mongoDb = require('mongodb').Db;
 //const mongoCollection = require('mongodb').Collection;
 
-var createUserDict = function(){
-    return {
-        name: "UserName",
-        username: "username",
-        pass: "password",
-        age: "20",
-        //phone: "51 33333333",
-        email: "user@email.com",
-        //region: "Zona",
-        address: "123 john street"
-    };
-}
+describe('User test', function(){
+    var db; //db mock
 
-//sucesso
-it('Should not trhow exception', function(){
-    let reqOpt = createUserDict();
-    UserDAO.validate(reqOpt);  
-});
+    //executado antes de cada teste para zerar o mock do banco
+    beforeEach(function(){
+        db = {
+            collection: function(col){return this},
+            save: function(save){return this},
+            findOne: function(dict){return this}
+        };
+    });
 
-//erros
-it('Should trhow exception when validating user if no age', function(){
-    let reqOpt = createUserDict();
-    delete reqOpt.age;
+    var createUserDict = function(){
+        return {
+            name: "UserName",
+            username: "username",
+            pass: "password",
+            age: "20",
+            //phone: "51 33333333",
+            email: "user@email.com",
+            //region: "Zona",
+            address: "123 john street"
+        };
+    }
 
-    expect(function(){
-        UserDAO.validate(reqOpt);        
-    }).to.throw("No age provided");  
-});
+    //database
+    it('Should save the User on the database', function(){
+        var collectionMock = sinon.spy(db, "collection");
+        var saveMock = sinon.spy(db, "save");
 
-it('Should trhow exception when validating user if no name', function(){
-    let reqOpt = createUserDict();
-    delete reqOpt.name;
+        var dict = createUserDict();
 
-    expect(function(){
-        UserDAO.validate(reqOpt);        
-    }).to.throw("No name provided");    
-});
-/*
-it('Should trhow exception when validating user if no phone', function(){
-    let reqOpt = createUserDict();
-    delete reqOpt.phone;
+        UserDAO.save(db, dict);
 
-    expect(function(){
-        UserDAO.validate(reqOpt);        
-    }).to.throw("No phone provided");    
-});*/
+        sinon.assert.calledWith(collectionMock, "user");
+        sinon.assert.calledWith(saveMock, dict);
+    });
 
-it('Should trhow exception when validating user if no email', function(){
-    let reqOpt = createUserDict();
-    delete reqOpt.email;
+    it('Should call database loading with correct username parameters', function(){
+        var collectionMock = sinon.spy(db, "collection");
+        var findOneMock = sinon.spy(db, "findOne");
+        
+        var dict = {
+            username: "username"
+        }
 
-    expect(function(){
-        UserDAO.validate(reqOpt);        
-    }).to.throw("No email provided");    
-});
-/*
-it('Should trhow exception when validating user if no region', function(){
-    let reqOpt = createUserDict();
-    delete reqOpt.region;
+        UserDAO.findUserByName(db, "username");   
 
-    expect(function(){
-        UserDAO.validate(reqOpt);        
-    }).to.throw("No region provided");    
-});*/
+        sinon.assert.calledWith(collectionMock, "user");
+        sinon.assert.calledWith(findOneMock, dict);
+    });
 
-it('Should trhow exception when validating user if no address', function(){
-    let reqOpt = createUserDict();
-    delete reqOpt.address;
+    //sucesso
+    it('Should not trhow exception when validating with ALL required parameters', function(){
+        let reqOpt = createUserDict();
+        UserDAO.validate(reqOpt);  
+    });
 
-    expect(function(){
-        UserDAO.validate(reqOpt);        
-    }).to.throw("No address provided");    
-});
+    //erros
+    it('Should trhow exception when validating user if no age', function(){
+        let reqOpt = createUserDict();
+        delete reqOpt.age;
 
-it('Should trhow exception when validating user if no usernar', function(){
-    let reqOpt = createUserDict();
-    delete reqOpt.username;
+        expect(function(){
+            UserDAO.validate(reqOpt);        
+        }).to.throw("No age provided");  
+    });
 
-    expect(function(){
-        UserDAO.validate(reqOpt);        
-    }).to.throw("No username provided");  
-});
+    it('Should trhow exception when validating user if no name', function(){
+        let reqOpt = createUserDict();
+        delete reqOpt.name;
 
-it('Should trhow exception when validating user if no password', function(){
-    let reqOpt = createUserDict();
-    delete reqOpt.pass;
+        expect(function(){
+            UserDAO.validate(reqOpt);        
+        }).to.throw("No name provided");    
+    });
+    /*
+    it('Should trhow exception when validating user if no phone', function(){
+        let reqOpt = createUserDict();
+        delete reqOpt.phone;
 
-    expect(function(){
-        UserDAO.validate(reqOpt);        
-    }).to.throw("No pass provided");  
+        expect(function(){
+            UserDAO.validate(reqOpt);        
+        }).to.throw("No phone provided");    
+    });*/
+
+    it('Should trhow exception when validating user if no email', function(){
+        let reqOpt = createUserDict();
+        delete reqOpt.email;
+
+        expect(function(){
+            UserDAO.validate(reqOpt);        
+        }).to.throw("No email provided");    
+    });
+    /*
+    it('Should trhow exception when validating user if no region', function(){
+        let reqOpt = createUserDict();
+        delete reqOpt.region;
+
+        expect(function(){
+            UserDAO.validate(reqOpt);        
+        }).to.throw("No region provided");    
+    });*/
+
+    it('Should trhow exception when validating user if no address', function(){
+        let reqOpt = createUserDict();
+        delete reqOpt.address;
+
+        expect(function(){
+            UserDAO.validate(reqOpt);        
+        }).to.throw("No address provided");    
+    });
+
+    it('Should trhow exception when validating user if no usernar', function(){
+        let reqOpt = createUserDict();
+        delete reqOpt.username;
+
+        expect(function(){
+            UserDAO.validate(reqOpt);        
+        }).to.throw("No username provided");  
+    });
+
+    it('Should trhow exception when validating user if no password', function(){
+        let reqOpt = createUserDict();
+        delete reqOpt.pass;
+
+        expect(function(){
+            UserDAO.validate(reqOpt);        
+        }).to.throw("No pass provided");  
+    });
 });
