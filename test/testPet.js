@@ -56,7 +56,7 @@ describe("Pet test", function(){
         PetDAO.findAll(db);
 
         sinon.assert.calledWith(collectionMock, "pet");
-        sinon.assert.calledWith(findMock, {}, {_id: 1});
+        sinon.assert.calledWith(findMock, {}, {_id: 1, picture: 1});
     });
 
     it('Should call the database loading the 6 most recent pets', function(){
