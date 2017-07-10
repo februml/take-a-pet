@@ -34,7 +34,7 @@ PetDAO.prototype.save = function(db, newPet, user){
 }
 
 PetDAO.prototype.findAll = function(db, callback){
-    db.collection("pet").find({}, {_id: 1}).toArray(function(err, results){
+    db.collection("pet").find({}, {_id: 1, picture: 1}).sort({_id:-1}).toArray(function(err, results){
         if(err){
             throw(err);
         }

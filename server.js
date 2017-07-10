@@ -2,10 +2,21 @@
 const session = require('express-session');
 const bodyParser = require("body-parser");
 const MongoClient = require('mongodb').MongoClient;
-
+const multer = require('multer');
+const fs = require('fs');
 const UserDAO = require('./app/UserDAO');
 const PetDAO = require('./app/PetDAO');
 const LoginDAO = require('./app/LoginDAO');
+
+// configurações envio de imagem
+var storage = multer.diskStorage({
+    destination: 'public/tmp/',
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '.jpg')
+    }
+});
+
+var upload = multer({ storage: storage });
 
 //configurando express aplicação
 const app = express();
@@ -194,7 +205,7 @@ app.get("/findPet/:petId", function(request, response){
 
 });
 
-app.post("/cadastrarPet-action", function(request, response){
+app.post("/cadastrarPet-action", upload.single('petPhoto'), function(request, response){
     //console.log(JSON.stringify(request.body));
     let sess = request.session;
     var newPet = {
@@ -206,11 +217,11 @@ app.post("/cadastrarPet-action", function(request, response){
         address: request.body.endpet,
         help: request.body.tipoajuda,
         username: sess.username,
-        name: sess.name
+        name: sess.name,
+        picture: request.file.filename
     }
     try{
         PetDAO.validate(newPet);
-
         UserDAO.findUserByName(db, newPet.username, function(user){
             PetDAO.save(db, newPet, user);
             setTimeout(function() {

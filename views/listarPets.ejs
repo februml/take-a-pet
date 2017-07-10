@@ -48,7 +48,7 @@
                                 <i class="fa fa-search-plus fa-3x" petId="<%= petList[i]._id %>"></i>
                             </div>
                         </div>
-                        <img src="pictures/dogplaceholder.jpg" class="img-responsive" alt="">
+                        <img src="tmp/<%= petList[i].picture %>" class="img" alt="" height="262.5" width="350">
                     </a>
                 </div>
             <% } %>
@@ -70,7 +70,7 @@
                 <div class="row">
                     <div class="modal-body">
                         <div class="col-lg-6">
-                            <img src="pictures/dogplaceholder.jpg" class="img-responsive" alt="">
+                            <img id="imgPet" src="" class="img" alt="" height="405" width="540">
                         </div>
                         <div class="col-lg-6">
                             <p id="tipo" class="alignModal"></p>
@@ -118,6 +118,7 @@
                     
                 // carrega os dados de acordo com o id
                 $.get('/findPet/' + petId, function(petData) {
+                    $('#imgPet').attr('src', 'tmp/' + petData.picture);
                     $('#tipo').html('Tipo: ' + petData.type);
                     $('#sexo').html('Sexo: ' + petData.sex);
                     $('#tamanho').html('Tamanho: ' + petData.size);
